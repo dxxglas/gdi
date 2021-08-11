@@ -1,10 +1,6 @@
 -- DROP TABLES
 DROP TABLE comentar;
-DROP TABLE data_comentario;
 DROP TABLE publicar;
-DROP TABLE data_publicacao;
-DROP TABLE moderar_denuncia;
-DROP TABLE moderar;
 DROP TABLE curtir_postagem;
 DROP TABLE curtir_comentario;
 DROP TABLE reportar;
@@ -13,6 +9,7 @@ DROP TABLE inscrever;
 DROP TABLE acompanhar;
 DROP TABLE comentario;
 DROP TABLE postagem;
+DROP TABLE denuncia;
 DROP TABLE categoria;
 DROP SEQUENCE c_id;
 DROP TABLE membro;
