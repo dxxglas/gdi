@@ -1,6 +1,17 @@
 --membro
 
-INSERT INTO tb_membro VALUES ( tp_usuario( 'ruyzinho', 'Ruy Barbosa', to_date('31/08/1995', 'dd/mm/yyyy'), varray_email(tp_email('ruy_b@gmail.com')) ), 27 ); /
+INSERT INTO tb_membro VALUES (
+    tp_membro(
+        tp_usuario(
+            'ruyzinho', 
+            'Ruy Barbosa', 
+            to_date('31/08/1995', 'dd/mm/yyyy'), 
+            varray_email(tp_email('ruy_b@gmail.com')) 
+            ), 
+        27
+    )
+); 
+/
 
 INSERT INTO tb_membro VALUES ( tp_usuario( 'bruno25', 'Bruno Gomes', to_date('09/03/1999', 'dd/mm/yyyy'), varray_email(tp_email('brunogomes@gmail.com')) ), 16 ); /
 
