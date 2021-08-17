@@ -223,11 +223,12 @@ INSERT INTO tb_denuncia VALUES (
 --comentario
 INSERT INTO tb_comentario VALUES (
 	'Estranho',
-(	SELECT REF(P) FROM tb_postagem P
-WHERE P.id = '00001'
-), 
-'Que sonho estranho!',
-2
+    (	
+        SELECT REF(P) FROM tb_postagem P
+        WHERE P.id = '00001'
+    ), 
+    'Que sonho estranho!',
+    2
 );
 /
 
@@ -345,17 +346,6 @@ to_date('15/07/2021', 'dd/mm/yyyy')
 );
 /
 
---reportar
-INSERT INTO tb_reportar VALUES (
-	(	SELECT REF(M) FROM tb_membro M 
-WHERE M.nome_de_usuario = 'grogu'
-), 
-(	SELECT REF(M) FROM tb_membro M 
-WHERE M.nome_de_usuario = 'ruyzinho'
-)
-);
-/
-
 --publicar
 INSERT INTO tb_publicar VALUES (
 	(	SELECT REF(M) FROM tb_membro M 
@@ -414,32 +404,33 @@ WHERE C.id = 3
 /
 
 INSERT INTO tb_publicar VALUES (
-	(	SELECT REF(M) FROM tb_membro M 
-WHERE M.nome_de_usuario = 'ruyzinho'
-), 
-(	SELECT REF(P) FROM tb_postagem P 
-WHERE P.id = '00015'
-),
-(	SELECT REF(C) FROM tb_categoria C 
-WHERE C.id = 3
-),
+	(	
+        SELECT REF(M) FROM tb_membro M 
+        WHERE M.nome_de_usuario = 'ruyzinho'
+    ), 
+    (	
+        SELECT REF(P) FROM tb_postagem P 
+        WHERE P.id = '00015'
+    ),
+    (	
+        SELECT REF(C) FROM tb_categoria C 
+        WHERE C.id = 3
+    ),
 	to_date('01/01/2021', 'dd/mm/yyyy')
 );
 /
 
 --comentar
 INSERT INTO tb_comentar VALUES (
-	(	SELECT REF(P) FROM tb_postagem P 
-WHERE P.id = '00013'
-),
-(	SELECT REF(M) FROM tb_membro M 
-WHERE M.nome_de_usuario = 'ruyzinho'
-),
-(	SELECT REF(C) FROM tb_comentario C 
-WHERE C.id_postagem = '20021'
-),
+	(
+	    SELECT REF(P) FROM tb_postagem P WHERE P.id = '00013'
+    ),
+    (	
+        SELECT REF(M) FROM tb_membro M WHERE M.nome_de_usuario = 'ruyzinho'
+    ),
+    (	
+        SELECT REF(C) FROM tb_comentario C WHERE (C.id_postagem).id = '00013' AND C.titulo = 'Legal'
+    ),
 	to_date('09/07/2021', 'dd/mm/yyyy')
 );
 /
-
-
