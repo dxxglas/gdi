@@ -1,8 +1,13 @@
+-- drop table
+DROP TABLE tb_denuncia;
+DROP TABLE tb_postagem;
+DROP TABLE tb_categoria;
+DROP TABLE tb_membro;
+DROP TABLE tb_moderador;
+
+-- drop type
 DROP TYPE tp_comentar;
 DROP TYPE tp_publicar;
-DROP TYPE tp_curtir_postagem;
-DROP TYPE tp_curtir_comentario;
-DROP TYPE tp_reportar;
 DROP TYPE tp_denunciar;
 DROP TYPE tp_inscrever;
 DROP TYPE tp_acompanhar;
@@ -33,6 +38,14 @@ CREATE OR REPLACE TYPE tp_usuario AS OBJECT (
 	nome VARCHAR2(30),
    	data_nascimento DATE,
 	emails varray_email,
+	CONSTRUCTOR FUNCTION 
+	tp_usuario (
+		SELF IN OUT NOCOPY tp_usuario,
+		nome_de_usuario VARCHAR2,
+		nome VARCHAR2,
+   		data_nascimento DATE,
+		emails varray_email
+	) RETURN SELF AS RESULT,
 	MEMBER FUNCTION idade_minima RETURN VARCHAR2
 ) NOT FINAL NOT INSTANTIABLE;
 /
@@ -40,23 +53,13 @@ CREATE OR REPLACE TYPE tp_usuario AS OBJECT (
 ALTER TYPE tp_usuario ADD ATTRIBUTE (conta VARCHAR2(18)) CASCADE;
 /
 
-ALTER TYPE tp_usuario ADD CONSTRUCTOR FUNCTION 
-	tp_usuario (
-		nome_de_usuario VARCHAR2,
-		nome VARCHAR2,
-   		data_nascimento DATE,
-		emails varray_email,
-		conta VARCHAR2
-	) RETURN SELF AS RESULT CASCADE;
-/
-
 CREATE OR REPLACE TYPE BODY tp_usuario AS
 	CONSTRUCTOR FUNCTION tp_usuario (
+		SELF IN OUT tp_usuario,
 		nome_de_usuario VARCHAR2,
 		nome VARCHAR2,
    		data_nascimento DATE,
-		emails varray_email,
-		conta VARCHAR2
+		emails varray_email
 	) RETURN SELF AS RESULT
 		IS 
 		BEGIN
@@ -64,7 +67,7 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
 			SELF.nome := nome;
 			SELF.data_nascimento := data_nascimento;
 			SELF.emails := emails;
-			SELF.conta := CONCAT(nome_de_usuario, '@forum.com');
+			SELF.conta := conta;
 			RETURN;
 		END;
 
@@ -219,27 +222,10 @@ CREATE OR REPLACE TYPE tp_denunciar AS OBJECT(
 /
 
 --reportar
-CREATE OR REPLACE TYPE tp_reportar AS OBJECT(
-	membro_denunciado REF tp_membro,
-	membro_denunciante REF tp_membro
-);
-/
-ALTER TYPE tp_reportar ADD ATTRIBUTE (data DATE) CASCADE;
-/
 
 --curtir comentario
-CREATE OR REPLACE TYPE tp_curtir_comentario AS OBJECT(
-	membro REF tp_membro,
-	comentario REF tp_comentario
-);
-/
 
 --curtir postagem
-CREATE OR REPLACE TYPE tp_curtir_postagem AS OBJECT(
-	membro REF tp_membro,
-	postagem REF tp_postagem
-);
-/
 
 --publicar
 CREATE OR REPLACE TYPE tp_publicar AS OBJECT(
