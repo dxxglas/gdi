@@ -149,10 +149,10 @@ CREATE OR REPLACE TYPE tp_categoria AS OBJECT(
 /
 
 CREATE OR REPLACE TYPE BODY tp_categoria AS
-MAP MEMBER FUNCTION categoria_n RETURN VARCHAR IS
-	BEGIN
-		RETURN id || titulo;
-	END;
+	MAP MEMBER FUNCTION categoria_n RETURN VARCHAR IS
+		BEGIN
+			RETURN id || titulo;
+		END;
 END;
 /		
 
@@ -178,7 +178,7 @@ CREATE OR REPLACE TYPE tp_denuncia AS OBJECT(
 --comentario
 CREATE OR REPLACE TYPE tp_comentario AS OBJECT(
 	titulo VARCHAR2(50),
-	id_postagem tp_postagem,
+	id_postagem REF tp_postagem,
 	descricao VARCHAR2(240),
 	curtidas NUMBER,
 	ORDER MEMBER FUNCTION relevancia(c tp_comentario) RETURN INTEGER
@@ -220,12 +220,6 @@ CREATE OR REPLACE TYPE tp_denunciar AS OBJECT(
 	data DATE
 ) FINAL;
 /
-
---reportar
-
---curtir comentario
-
---curtir postagem
 
 --publicar
 CREATE OR REPLACE TYPE tp_publicar AS OBJECT(

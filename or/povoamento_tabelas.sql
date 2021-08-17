@@ -219,3 +219,227 @@ INSERT INTO tb_denuncia VALUES (
     ) 
 ); 
 / 
+
+--comentario
+INSERT INTO tb_comentario VALUES (
+	'Estranho',
+(	SELECT REF(P) FROM tb_postagem P
+WHERE P.id = '00001'
+), 
+'Que sonho estranho!',
+2
+);
+/
+
+INSERT INTO tb_comentario VALUES (
+	'Significado',
+(	SELECT REF(P) FROM tb_postagem P
+WHERE P.id = '00001'
+), 
+'Será que tem algum significado?',
+1
+);
+/
+
+INSERT INTO tb_comentario VALUES (
+	'Parabéns',
+(	SELECT REF(P) FROM tb_postagem P
+WHERE P.id = '00013'
+), 
+'Parabéns para ele!!',
+3
+);
+/
+
+INSERT INTO tb_comentario VALUES (
+	'Legal',
+(	SELECT REF(P) FROM tb_postagem P
+WHERE P.id = '00013'
+), 
+'Que legal!!!',
+1
+);
+/
+
+--acompanhar
+INSERT INTO tb_acompanhar VALUES (
+	(	SELECT REF(M) FROM tb_moderador M 
+WHERE M.nome_de_usuario = 'cacto'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 1
+)
+);
+/
+
+INSERT INTO tb_acompanhar VALUES (
+	(	SELECT REF(M) FROM tb_moderador M 
+WHERE M.nome_de_usuario = 'lukass'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 2
+)
+);
+/
+
+INSERT INTO tb_acompanhar VALUES (
+	(	SELECT REF(M) FROM tb_moderador M 
+WHERE M.nome_de_usuario = 'gator7'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 3
+)
+);
+/
+
+--inscrever
+INSERT INTO tb_inscrever VALUES (	
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'leticiaV'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 1
+)
+);
+/
+
+INSERT INTO tb_inscrever VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'bruno25'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 2
+)
+);
+/
+
+INSERT INTO tb_inscrever VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'grogu'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 3
+)
+);
+/
+
+INSERT INTO tb_inscrever VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'ruyzinho'
+), 
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 3
+)
+);
+/
+
+--denunciar
+INSERT INTO tb_denunciar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'ruyzinho'
+), 
+(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00014'
+),
+to_date('15/07/2021', 'dd/mm/yyyy')
+);
+/
+
+--reportar
+INSERT INTO tb_reportar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'grogu'
+), 
+(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'ruyzinho'
+)
+);
+/
+
+--publicar
+INSERT INTO tb_publicar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'bruno25'
+), 
+(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00001'
+),
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 2
+),
+to_date('11/02/2021', 'dd/mm/yyyy')
+);
+/
+
+INSERT INTO tb_publicar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'leticiaV'
+), 
+(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00012'
+),
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 1
+),
+to_date('15/06/2021', 'dd/mm/yyyy')
+);
+/
+
+INSERT INTO tb_publicar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'grogu'
+), 
+(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00013'
+),
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 3
+), 
+to_date('08/07/2021', 'dd/mm/yyyy')
+);
+/
+
+INSERT INTO tb_publicar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'grogu'
+), 
+(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00014'
+),
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 3
+),
+	to_date('12/07/2021', 'dd/mm/yyyy')
+);
+/
+
+INSERT INTO tb_publicar VALUES (
+	(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'ruyzinho'
+), 
+(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00015'
+),
+(	SELECT REF(C) FROM tb_categoria C 
+WHERE C.id = 3
+),
+	to_date('01/01/2021', 'dd/mm/yyyy')
+);
+/
+
+--comentar
+INSERT INTO tb_comentar VALUES (
+	(	SELECT REF(P) FROM tb_postagem P 
+WHERE P.id = '00013'
+),
+(	SELECT REF(M) FROM tb_membro M 
+WHERE M.nome_de_usuario = 'ruyzinho'
+),
+(	SELECT REF(C) FROM tb_comentario C 
+WHERE C.id_postagem = '20021'
+),
+	to_date('09/07/2021', 'dd/mm/yyyy')
+);
+/
+
+
