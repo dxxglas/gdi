@@ -23,3 +23,11 @@ WHERE M.nome_de_usuario =
         SELECT DEREF(A.moderador).nome_de_usuario FROM tb_acompanhar A
         WHERE (A.categoria).id = 3
     );
+
+-- MAP FUNCTION
+SELECT c.id, c.titulo, c.descricao, i.membro.nome_de_usuario, i.membro.nivel FROM tb_categoria c
+
+INNER JOIN tb_inscrever i
+ON c.id = DEREF(i.categoria).id
+
+ORDER BY c.categoria_n();
